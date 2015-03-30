@@ -1,0 +1,6 @@
+((20 32 "Andoria" "blue" ("Away" "Denobula"))
+ (450 90 "Away" "red" ("Andoria" "Alpha Centauri" "Beta Keramis"))
+ (700 500 "Alpha Centauri" "yellow" ("Away" "End" "Denobula"))
+ (900 200 "End" "brown" ("Alpha Centauri" "Beta Keramis"))
+ (200 400 "Denobula" "blue" ("Alpha Centauri" "Andoria"))
+ (700 150 "Beta Keramis" "green" ("End" "Away")))
