@@ -67,7 +67,7 @@
                                   (first connections))))))
 
 (define (jump-target now)
-  (let ([target (dict-ref-in now '(mode-data nav-target))])
+  (let ([target (dict-ref (now 'mode-data) 'nav-target false)])
     (if target
         (let* ([now (now 'system target)]
                [now (now 'mode-data (dict-remove (now 'mode-data) 'nav-target))])
