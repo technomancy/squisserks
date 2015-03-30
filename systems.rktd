@@ -3,4 +3,5 @@
  (700 500 "Alpha Centauri" "yellow" ("Away" "End" "Denobula"))
  (900 200 "End" "brown" ("Alpha Centauri" "Beta Keramis"))
  (200 400 "Denobula" "blue" ("Alpha Centauri" "Andoria"))
- (700 150 "Beta Keramis" "green" ("End" "Away")))
+ (700 150 "Beta Keramis" "green" ("End" "Away" "Middle"))
+ (700 325 "Middle" "purple" ("Beta Keramis")))
