@@ -39,13 +39,31 @@
 
 
 
-(define (tick-fly now)
+(define (move-ship now)
   (match (now 'mode-data)
     [(hash-table ('x x) ('y y) ('dy dy) ('dx dx) _ ...)
      (now 'mode-data (hash-set* (now 'mode-data)
                                 'x (round (+ x dx))
                                 'y (round (+ y dy))))]))
 
+(define g 0.2)
+
+(define (gravitate now)
+  (match (now 'mode-data)
+    [(hash-table ('x x) ('y y) ('dy dy) ('dx dx) _ ...)
+     (let* ([world (dict-ref (now 'systems) (now 'system))]
+            [distance (sqrt (+ (* x x) (* y y)))]
+            [theta (atan x y)]
+            [f (if (positive? distance)
+                   (/ (* g (world 'size)) (log (* distance 50)))
+                   0)]
+            [ddx (* f (sin theta))] [ddy (* f (cos theta))])
+       (now 'mode-data (hash-set* (now 'mode-data)
+                                'dx (round (- dx ddx))
+                                'dy (round (- dy ddy)))))]))
+
+(define (tick-fly now)
+  (gravitate (move-ship now)))
 
 
 
