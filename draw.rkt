@@ -23,9 +23,9 @@
             [star (list-ref stars (random (length stars)))])
         (starify (underlay/xy scene x y star) (sub1 star-count)))))
 
-(define (draw-dash scene now)
+(define (draw-dash scene words)
   (let ([dash (rectangle width dash-height "solid" "black")]
-        [text (text (format "Credits: ~s | Fuel: ~s"
-                            (now 'credits) (now 'fuel))
-                    14 "white")])
+        [text (text/font words 14 "white" "Inconsolata"
+                         'default 'normal 'bold #f)])
     (above scene (underlay/xy dash 10 10 text))))
+

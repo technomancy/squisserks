@@ -53,7 +53,10 @@
         scene)))
 
 (define (draw-map now)
-  (draw-dash (draw-nav (draw-systems (draw-connections (starify scene 30) now) now) now) now))
+  (draw-dash (draw-nav (draw-systems (draw-connections (starify scene 30) now)
+                                     now) now)
+             (format "Credits: ~s | Fuel: ~s"
+                     (now 'credits) (now 'fuel))	))
 
 
 

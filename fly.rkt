@@ -12,11 +12,30 @@
 (define ship (overlay (isosceles-triangle 30 15 "solid" "aquamarine")
                       (circle 20 "outline" "aquamarine")))
 
-(define (draw-fly now)
+(define (draw-ship now)
   (match (now 'mode-data)
     [(hash-table ('x x) ('y y) ('dir dir) _ ...)
      (underlay (scene-offset x y)
                (rotate dir ship))]))
+
+(define (draw-sun scene size color m)
+  (let ([x (dict-ref m 'x)]
+        [y (dict-ref m 'y)]
+        [sun (circle size "solid" color)])
+    (if (and (< (- width) (* 2 x) width)
+             (< (- height) (* 2 y) height))
+        (underlay/xy scene
+                     (- (/ width 2) x (/ size 2))
+                     (- (/ height 2) y (/ size 2)) sun)
+        scene)))
+
+(define (draw-fly now)
+  (let ([system (dict-ref (now 'systems) (now 'system))])
+    (draw-dash (draw-sun (draw-ship now) (system 'size) (system 'color)
+                         (now 'mode-data))
+               (format "x: ~s | y: ~s"
+                       (dict-ref (now 'mode-data) 'x)
+                       (dict-ref (now 'mode-data) 'y)))))
 
 
 
@@ -27,9 +46,10 @@
                                 'x (round (+ x dx))
                                 'y (round (+ y dy))))]))
 
+
 
 
-(define engine 1)
+(define engine 3)
 (define max-speed 25)
 
 (define (accel mode-data)
@@ -55,6 +75,6 @@
 
 (define (fly now)
   (let ([now (now 'mode 'fly)])
-    (now 'mode-data #hash((x . 0) (y . 0)
+    (now 'mode-data #hash((x . 300) (y . 300)
                           (dx . 0) (dy . 0)
                           (dir . 0)))))
