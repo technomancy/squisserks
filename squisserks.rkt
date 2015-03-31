@@ -5,7 +5,7 @@
 (fstruct now (systems mode mode-data
                       system credits fuel cargo))
 
-(fstruct system (x y name color connections))
+(fstruct system (x y name color size connections planets))
 
 
 
